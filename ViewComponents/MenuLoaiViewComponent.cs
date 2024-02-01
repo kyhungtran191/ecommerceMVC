@@ -7,7 +7,7 @@ namespace EcommerceMVC.ViewComponents
 {
     public class MenuLoaiViewComponent : ViewComponent
     {
-        protected Hshop2023Context _Hshop2023Contexthshop2023Context;
+        private readonly Hshop2023Context _Hshop2023Contexthshop2023Context;
         public MenuLoaiViewComponent(Hshop2023Context hshop2023Context)
         {
             _Hshop2023Contexthshop2023Context= hshop2023Context;
