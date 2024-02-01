@@ -11,7 +11,6 @@ namespace EcommerceMVC.Controllers
         {
             _hshopDB= hshopDB;
         }
-        [Route("/products")]
         public IActionResult Index(int? loai)
         {
             var hanghoa = _hshopDB.HangHoas.AsQueryable();
@@ -28,6 +27,24 @@ namespace EcommerceMVC.Controllers
               TenHH = p.TenHh,
               TenLoai= p.MaLoaiNavigation.TenLoai
            });
+            return View(results);
+        }
+        public IActionResult Search(string? query)
+        {
+            var hanghoa = _hshopDB.HangHoas.AsQueryable();
+            if (query != null)
+            {
+                hanghoa = hanghoa.Where(p => p.TenHh.Contains(query));
+            }
+            var results = hanghoa.Select(p => new HangHoaVM
+            {
+                MaHh = p.MaHh,
+                DonGia = p.DonGia ?? 0,
+                Hinh = p.Hinh ?? "",
+                MoTaNgan = p.MoTaDonVi ?? " ",
+                TenHH = p.TenHh,
+                TenLoai = p.MaLoaiNavigation.TenLoai
+            });
             return View(results);
         }
     }

@@ -8,6 +8,8 @@ namespace EcommerceMVC
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            builder.Services.AddControllersWithViews();
+            builder.Services.AddControllers();
             builder.Services.AddDbContext<Hshop2023Context>((options) =>
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectDBURL"));
@@ -15,7 +17,6 @@ namespace EcommerceMVC
             // Add services to the container.
             builder.Services.AddControllers();
             builder.Services.AddRazorPages();
-            builder.Services.AddControllersWithViews();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -24,12 +25,10 @@ namespace EcommerceMVC
                 app.UseExceptionHandler("/Home/Error");
             }
             app.UseStaticFiles();
-
-            app.UseRouting();
-
-            app.UseAuthorization();
+            app.MapDefaultControllerRoute();
             app.MapControllers();
             app.MapRazorPages();
+            app.UseAuthorization();
             app.Run();
         }
     }
