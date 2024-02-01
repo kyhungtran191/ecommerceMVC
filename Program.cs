@@ -8,7 +8,6 @@ namespace EcommerceMVC
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-            builder.Services.AddControllersWithViews();
             builder.Services.AddControllers();
             builder.Services.AddDbContext<Hshop2023Context>((options) =>
             {
@@ -19,13 +18,13 @@ namespace EcommerceMVC
             builder.Services.AddRazorPages();
             var app = builder.Build();
 
+
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {
                 app.UseExceptionHandler("/Home/Error");
             }
             app.UseStaticFiles();
-            app.MapDefaultControllerRoute();
             app.MapControllers();
             app.MapRazorPages();
             app.UseAuthorization();

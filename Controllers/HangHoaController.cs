@@ -34,7 +34,7 @@ namespace EcommerceMVC.Controllers
             var hanghoa = _hshopDB.HangHoas.AsQueryable();
             if (query != null)
             {
-                hanghoa = hanghoa.Where(p => p.TenHh.Contains(query));
+                hanghoa = hanghoa.Where(p => p.TenHh.StartsWith(query));
             }
             var results = hanghoa.Select(p => new HangHoaVM
             {
